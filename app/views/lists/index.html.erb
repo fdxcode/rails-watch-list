@@ -1,0 +1,23 @@
+<div class="contenido mt-5">
+
+<div class="container mb-5">
+<h1>My List</h1>
+  <div class="d-flex justify-content-between my-4">
+    <span class="mb-2 d-block"><small><em class="text-muted"></em></small></span>
+    <div>
+      <a href="/lists/new" class="btn btn-success">add movie</a>
+    </div>
+  </div>
+
+    <% @lists.each do |list| %>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+        <%= link_to list_path(list), class: "text-decoration-none" do %>
+          <div class="card-category" data-aos="zoom-in">
+            <%= list.name %>
+          </div>
+        <% end %>
+        </div>
+      </div>
+    <% end %>
+</div>

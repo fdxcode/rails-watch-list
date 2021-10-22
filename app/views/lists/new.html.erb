@@ -1,0 +1,7 @@
+<div class="container mx-auto col-4 mt-5">
+  <%= simple_form_for @list do |f| %>
+    <%= f.label :nombre %>
+    <%= f.input :name, placeholder: "Drama", error: "Categoria es obligatoria, please specify one" %>
+    <%= f.submit class: "btn btn-success w-100" %>
+  <% end %>
+</div>
