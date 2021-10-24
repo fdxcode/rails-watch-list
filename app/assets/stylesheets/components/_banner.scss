@@ -1,8 +1,17 @@
 .home-banner {
-  background-image: url('https://img.24reel.com/cdn/medium/movie/57e10c95-0110-4add-b7f4-a6d60f7a0dbe.jpg');
+  background-image: url('cine.jpg');
+  background-size: cover;
+  height: 60vh;
+  color: #eee;
+  text-align: center;
+  padding-top: 20vh;
+}
+
+.home-banner-show{
+  background-image: url('cine.jpg');
   background-size: cover;
   height: 40vh;
   color: #eee;
   text-align: center;
-  align-items: center;
+  padding-top: 15vh;
 }

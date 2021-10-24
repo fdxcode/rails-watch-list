@@ -1,23 +1,38 @@
-<div class="contenido mt-5">
+<%= render "shared/header" %>
 
-<div class="container mb-5">
-<h1>My List</h1>
+<div class="contenido mt-5 mb-5">
+
   <div class="d-flex justify-content-between my-4">
-    <span class="mb-2 d-block"><small><em class="text-muted"></em></small></span>
+    <h2>Categorias</h2>
     <div>
-      <a href="/lists/new" class="btn btn-success">add movie</a>
+      <a href="/lists/new" class="btn btn-success">agregar categoria</a>
     </div>
   </div>
 
+  <div class="row">
     <% @lists.each do |list| %>
-      <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="co-12 colsm-6 col-md-4 mb-3">
         <div class="col">
-        <%= link_to list_path(list), class: "text-decoration-none" do %>
-          <div class="card-category" data-aos="zoom-in">
-            <%= list.name %>
-          </div>
+          <%= link_to list_path(list), class: "text-decoration-none" do %>
+            <div class="card text-white">
+            <% if list.photo.attached? %>
+                <%= cl_image_tag list.photo.key, height: 150, width: 150, crop: :fill, class: "card-img" %>
+            <% else %>
+                  <h5 class="card-title text-dark text-center p-5"><%= list.name %></h5>
+              <% end %>
+            <div class="card-img-overlay">
+              <h5 class="card-title text-center mt-5"><%= list.name %></h5>
+            </div>
+        </div>
+        <div class="card-footer bg-white border-success">
+          <a href="/lists/<%= list.id%>/edit" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
+          <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/lists/<%= list.id %>" class="btn btn-danger btn-sm">
+          <i class="fas fa-trash-alt"></i>
+        </a>
+        </div>
         <% end %>
         </div>
       </div>
     <% end %>
+  </div>
 </div>

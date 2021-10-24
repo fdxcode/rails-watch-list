@@ -7,11 +7,22 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+import { initUpdateNavbarOnScroll } from '../components/navbar';
+import { loadDynamicBannerText } from '../components/banner';
+import AOS from 'aos';
 import 'bootstrap';
-
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+console.log("Hola mundo");
+
+document.addEventListener('turbolinks:load', () => {
+  // Call your JS functions here
+  initUpdateNavbarOnScroll();
+  loadDynamicBannerText();
+  AOS.init();
+});

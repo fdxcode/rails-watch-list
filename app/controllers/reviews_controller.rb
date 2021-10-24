@@ -1,24 +1,24 @@
 class ReviewsController < ApplicationController
   def create
-  @review = Review.new(review_params)
-  @list = List.find(params[:list_id])
-  @review.list = @list
-  if @review.save
-    redirect_to list_path(@list)
-  else
-    render "lists/show"
+    @review = Review.new(review_params)
+    @movie = Movie.find(params[:movie_id])
+    @review.movie = @movie
+    if @review.save
+      redirect_to movie_path(@movie)
+    else
+      render "movies/show"
+    end
   end
-end
 
-def destroy
-  @review = Review.find(params[:id])
-  @review.destroy
-  redirect_to list_path(@review.list)
-end
+  def destroy
+    @review = Review.find(params[:id])
+    @review.destroy
+    redirect_to movie_path(@review.movie)
+  end
 
-private
+  private
 
-def review_params
-  params.require(:review).permit(:comment, :rating)
-end
+  def review_params
+    params.require(:review).permit(:name, :comment, :rating)
+  end
 end

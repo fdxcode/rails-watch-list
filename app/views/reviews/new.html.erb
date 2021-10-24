@@ -1,0 +1,6 @@
+<%= simple_form_for [@list, @review] do |f| %>
+  <%= f.input :name, placeholder: "Ingresa tu nombre u seudonimo" %>
+  <%= f.input :comment, placeholder: "Add your review here..." %>
+  <%= f.input :rating, as: :select, collection: (1..5), required: true, prompt: "What's your rating", input_html: { id: "review_rating" } %>
+  <%= f.submit class: "btn btn-success" %>
+<% end %>

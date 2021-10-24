@@ -1,0 +1,74 @@
+<p id="notice"><%= notice %></p>
+<div class="container">
+
+
+<div class="row bg-white py-4 mb-3">
+ <div class="col-md-4">
+      <img src="<%= @movie.poster_url %>" class="card-img" alt="..." style="width: 300px;">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <strong><%= @movie.title %> <span class="text-muted font-weight-normal">• <%= @movie.rating %> <i class="fas fa-star star-yellow"></i></span></strong>
+        <p class="card-text"><%= @movie.overview %></p>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+          Ver trailer
+        </button>
+      </div>
+    </div>
+</div>
+
+<div class="contenido">
+  <iframe width="800" height="515" src="<%= @movie.movie_url %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLongTitle">Trailer</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-auto">
+        <iframe width="420" height="415" src="<%= @movie.trailer_url %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <hr class="my-5 container">
+  <div class="row">
+    <div class="col-12 col-sm-6">
+      <h3>Comentarios</h3>
+      <% if @movie.reviews.empty? %>
+        <small><em class="text-muted">Sé el primero en comentar esta película.</em></small>
+      <% end %>
+      <% @movie.reviews.each do |review| %>
+        <div>
+          <p class="mb-0"> <strong>Autor:</strong> <%= review.name %></p>
+          <% review.rating.times do %>
+            <i class="far fa-star"></i>
+          <% end %>
+          <small><em class="text-muted"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
+          <p class="mb-0"><%= review.comment %></p>
+        </div>
+        <hr>
+      <% end %>
+    </div>
+    <div class="col-12 col-sm-6">
+      <div class="bg-white rounded p-3">
+        <h5 class="text-center mt-1">Añadir un comentario</h5>
+        <%= simple_form_for [@movie, @review] do |f| %>
+          <%= f.input :name, placeholder: "Ingresa tu nombre u seudonimo" %>
+          <%= f.input :comment, placeholder: "comentario..." %>
+          <%= f.input :rating, as: :select, collection: (1..5), required: true, prompt: "Numero de estrellas", input_html: { id: "review_rating" } %>
+          <%= f.submit class: "btn btn-success w-100 mt-2" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
